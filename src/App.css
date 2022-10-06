@@ -52,3 +52,7 @@ button:active {
 img {
   border: 3px solid chocolate;
 }
+
+#cat {
+  border: none;
+}
