@@ -20,6 +20,8 @@
 
 10-05-2022 8:40 pm - Completed map feature and added CSS; image of city map is displayed as part of search result.
 
+10-05-2022 9:50 pm - Completed error feature and added CSS; error message is displayed as result of incorrect input.
+
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 Created WRRC whiteboard for lab 06 with Gaz.
@@ -40,6 +42,7 @@ Finish time: 6:07 pm
 
 Actual time needed to complete: 12 minutes + (completed most of it during lecture)
 
+-------------------------------
 
 Name of feature: Map
 
@@ -50,3 +53,15 @@ Start time: 7pm
 Finish time: 8:40 pm
 
 Actual time needed to complete: 1 hr 40 mins
+
+-------------------------------
+
+Name of feature: Errors
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 8:50 pm
+
+Finish time: 9:50 pm
+
+Actual time needed to complete: 1 hr 

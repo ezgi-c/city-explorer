@@ -19,6 +19,7 @@ class App extends React.Component {
   };
 
   getLocation = async () => {
+    try {
     // baseURL
     // ? is called a "query"
     // key: YOUR_ACCESS_TOKEN
@@ -32,9 +33,16 @@ class App extends React.Component {
     this.setState({ location: response.data[0] });
     this.setState({ latitude: response.data[0].lat });
     this.setState({ longitude: response.data[0].lon }, () =>
-      console.log("coordinates: ", this.state.latitude, this.state.longitude)
+      console.log("coordinates: ", this.state.latitude, this.state.longitude),
+    this.setState({error:false})
     );
+    } catch(error) {
+      // console.log(error.response.data);
+      this.setState({error: error.response.data.error});
+    }
   };
+
+
 
   render() {
     return (
@@ -63,7 +71,13 @@ class App extends React.Component {
               alt="map"
             />
           </div>
-        )}
+        )
+        }
+        {this.state.error &&
+        <div>
+        <img id= "cat" src="400.jpeg" alt="400: Bad Request"/>
+        </div>
+        }
       </div>
     );
   }
