@@ -19,3 +19,20 @@
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+Created WRRC whiteboard for lab 06 with Gaz.
+
+## Lab 06 Whiteboard:
+
+<img src="public/wrrc.JPG">
+
+## Time Estimates
+
+Name of feature: Locations
+
+Estimate of time needed to complete: 1 hour (completed part of it following along in lecture)
+
+Start time: 5:55 pm
+
+Finish time: 6:07 pm
+
+Actual time needed to complete: 12 minutes + (completed most of it during lecture)
