@@ -38,7 +38,9 @@ class App extends React.Component {
     );
     } catch(error) {
       // console.log(error.response.data);
-      this.setState({error: error.response.data.error});
+      this.setState({
+        error: error.response.data.error, 
+        location: false });
     }
   };
 
