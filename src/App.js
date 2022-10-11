@@ -55,8 +55,10 @@ class App extends React.Component {
       console.log(response.data);
       this.setState({ forecast: response.data });
     } catch (error) {
+      console.log(error);
       this.setState({
         forecast: false,
+        serverError: error.message,
       });
     }
   };
@@ -89,16 +91,25 @@ class App extends React.Component {
             />
           </div>
         )}
+        <br></br>
         {this.state.forecast.length > 0 && (
           <>
+            <h1>Weather Forecast</h1>
+
             {this.state.forecast.map((obj, idx) => (
-              <Weather 
-              key = {idx}
-              date = {obj.date}
-              description = {obj.description}
-               />
+              <Weather
+                key={idx}
+                date={obj.date}
+                description={obj.description}
+              />
             ))}
           </>
+        )}
+        {this.state.serverError && (
+          <div>
+            <h1>Weather Forecast</h1>
+            <img id="dog" src="500dog.jpeg" alt="500: Internal Server Error" />
+          </div>
         )}
         {this.state.forecast.length < 1 && !(<Weather />)}
         {this.state.error && (
