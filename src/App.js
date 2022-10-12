@@ -30,35 +30,39 @@ class App extends React.Component {
       const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.searchQuery}&format=json`;
       // console.log("URL: ", url);
       const response = await axios.get(url);
-      // console.log("Response Object: ", response);
+      // console.log("Response dayect: ", response);
       // console.log("response data[0]: ", response.data[0]);
-      this.setState({ location: response.data[0] });
-      this.setState({ latitude: response.data[0].lat });
-      this.setState({ longitude: response.data[0].lon }, () =>
-        // console.log("coordinates: ", this.state.latitude, this.state.longitude),
-        this.setState({ error: false })
+      this.setState(
+        {
+          location: response.data[0],
+          latitude: response.data[0].lat,
+          longitude: response.data[0].lon,
+
+          // console.log("coordinates: ", this.state.latitude, this.state.longitude),
+          error: false,
+        },
+        () => this.getForecast()
       );
     } catch (error) {
       // console.log(error.response.data);
       this.setState({
-        error: error.response.data.error,
+        error: true,
         location: false,
       });
     }
-    this.getForecast();
   };
 
   getForecast = async () => {
+    const url = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.searchQuery}&lat=${this.state.latitude}&lon=${this.state.longitude}`;
     try {
-      const url = `${process.env.REACT_APP_SERVER}/weather?city=${this.state.searchQuery}`;
-      const response = await axios.get(url);
-      console.log(response.data);
+      let response = await axios.get(url);
+      console.log("weather data from server: ", response.data);
       this.setState({ forecast: response.data });
     } catch (error) {
-      console.log(error);
+      console.log("Error in getForecast: ", error);
       this.setState({
         forecast: false,
-        serverError: error.message,
+        serverError: true,
       });
     }
   };
@@ -96,11 +100,11 @@ class App extends React.Component {
           <>
             <h1>Weather Forecast</h1>
 
-            {this.state.forecast.map((obj, idx) => (
+            {this.state.forecast.map((day, idx) => (
               <Weather
                 key={idx}
-                date={obj.date}
-                description={obj.description}
+                date={day.date}
+                description={day.description}
               />
             ))}
           </>
