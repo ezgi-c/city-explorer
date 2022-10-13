@@ -53,9 +53,10 @@ class App extends React.Component {
   };
 
   getForecast = async () => {
-    const url = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.searchQuery}&lat=${this.state.latitude}&lon=${this.state.longitude}`;
     try {
-      let response = await axios.get(url);
+      const url = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.latitude}&lon=${this.state.longitude}`;
+      console.log("URL: ", url);
+      const response = await axios.get(url);
       console.log("weather data from server: ", response.data);
       this.setState({ forecast: response.data });
     } catch (error) {
@@ -66,6 +67,20 @@ class App extends React.Component {
       });
     }
   };
+
+  // handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const url = `${process.env.REACT_APP_SERVER}/photo?searchQuery=${this.state.searchQuery}`;
+  //     console.log("URL: ", url);
+  //     const response = await axios.get(url);
+  //     console.log(response.data);
+  //     this.setState({ photos: response.data });
+  //   } catch(error) {
+  //     console.error(error);
+  //   }
+  // }
+
 
   render() {
     return (
@@ -86,7 +101,7 @@ class App extends React.Component {
               The city you searched for is {this.state.location.display_name}
             </h2>
             <h4>
-              latitude : {this.state.latitude}, longitude :{" "}
+              latitude : {this.state.latitude}, longitude :
               {this.state.longitude}
             </h4>
             <img
@@ -102,9 +117,7 @@ class App extends React.Component {
 
             {this.state.forecast.map((day, idx) => (
               <Weather
-                key={idx}
-                date={day.date}
-                description={day.description}
+                forecast={this.state.forecast}
               />
             ))}
           </>
