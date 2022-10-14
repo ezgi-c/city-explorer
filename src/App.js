@@ -90,9 +90,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div className="header">
-          <Header />
-        </div>
+        <Header />
         <input
           type="text"
           onChange={this.handleChange}
@@ -103,14 +101,14 @@ class App extends React.Component {
         {this.state.location.display_name && (
           <div>
             <h2>
-              The city you searched for is {this.state.location.display_name}
+              Welocome to {this.state.location.display_name}!
             </h2>
             <h4>
               latitude : {this.state.latitude}, longitude :
               {this.state.longitude}
             </h4>
-            <img
-              src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.latitude},${this.state.longitude}&zoom=12`}
+            <img className="map"
+              src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.latitude},${this.state.longitude}&zoom=11&size=1400x400`}
               alt="map"
             />
           </div>
@@ -125,7 +123,8 @@ class App extends React.Component {
             <img id="dog" src="500dog.jpeg" alt="500: Internal Server Error" />
           </div>
         )}
-        <Movies movies={this.state.movies} />
+        <Movies 
+        movies={this.state.movies} />
         {this.state.forecast.length < 1 && !(<Weather />)}
         {this.state.error && (
           <div>

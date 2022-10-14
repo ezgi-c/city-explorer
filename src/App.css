@@ -1,16 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
 html {
-
   background-color: aliceblue;
+
 }
 .App {
   text-align: center;
+  background-color: aliceblue;
   margin-bottom: 5em;
 }
 
 .header {
-  margin-bottom:1em;
+  margin-bottom:4em;
   background-image: url("/public/istanbul.jpg");
   height: 600px;
   background-position: center;
@@ -18,12 +19,16 @@ html {
   justify-content: center;
   align-items: center;
   font-family: 'Righteous', cursive;
-  font-size: 6em;
+}
+
+.header h1 {
+  padding-top: .5em;
   color: aliceblue;
+  font-size: 14em;
 }
 
 h2 {
-  color:rgb(44, 44, 187);
+  color:rgb(80, 80, 182);
 }
 
 h4 {
@@ -49,14 +54,26 @@ button:active {
   background-color: rgb(175, 87, 24)
 }
 
-img {
+
+.map {
   border: 3px solid chocolate;
+  margin: 3em,0;
+}
+
+.movies {
+  margin-top: 5em;
+}
+
+.row {
+  margin-left: 10em;
+  margin-right: 10em;
+  display: flex;
 }
 
 #cat {
   border: none;
 }
 
-.forecast {
- margin-top: 3em;
+.weather {
+ margin-top: 5em;
 }

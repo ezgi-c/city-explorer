@@ -4,7 +4,7 @@ import { Accordion, Container } from "react-bootstrap";
 class Weather extends React.Component {
   render() {
     return (
-      <>
+      <div className="weather">
         <h1>Weather Forecast</h1>
 
         <Container>
@@ -19,7 +19,7 @@ class Weather extends React.Component {
             ))}
           </Accordion>
         </Container>
-      </>
+      </div>
     );
   }
 }
