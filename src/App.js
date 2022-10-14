@@ -3,6 +3,7 @@ import React from "react";
 import axios from "axios";
 import Header from "./Header";
 import Weather from "./Weather";
+import Movies from "./Movies";
 //import {Container, Form, Button} from 'react-bootstrap
 
 class App extends React.Component {
@@ -13,7 +14,8 @@ class App extends React.Component {
       location: {},
       latitude: "",
       longitude: "",
-      forecast: []
+      forecast: [],
+      movies: [],
     };
   }
 
@@ -39,24 +41,43 @@ class App extends React.Component {
 
           error: false,
         },
-        () => this.getForecast()
-        );
-      } catch (error) {
-        // console.log(error);
-        this.setState({
-          error: true,
-          location: false,
-        });
-      }
-    };
-    
-    getForecast = async () => {
-      try {
+        () => {
+          this.getForecast();
+          this.getMovies();
+        }
+      );
+    } catch (error) {
+      // console.log(error);
+      this.setState({
+        error: true,
+        location: false,
+      });
+    }
+  };
+
+  getForecast = async () => {
+    try {
       const url = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.latitude}&lon=${this.state.longitude}`;
       console.log("URL: ", url);
       const response = await axios.get(url);
       console.log("weather data from server: ", response.data);
       this.setState({ forecast: response.data });
+    } catch (error) {
+      console.log("Error in getForecast: ", error);
+      this.setState({
+        forecast: false,
+        serverError: true,
+      });
+    }
+  };
+
+  getMovies = async () => {
+    try {
+      const url = `${process.env.REACT_APP_SERVER}/movies?searchQuery=${this.state.searchQuery}`;
+      console.log("URL: ", url);
+      const response = await axios.get(url);
+      console.log("movie data from server: ", response.data);
+      this.setState({ movies: response.data });
     } catch (error) {
       console.log("Error in getForecast: ", error);
       this.setState({
@@ -96,9 +117,7 @@ class App extends React.Component {
         )}
         <br></br>
         {this.state.forecast.length > 0 && (
-              <Weather
-                forecast={this.state.forecast}
-              />
+          <Weather forecast={this.state.forecast} />
         )}
         {this.state.serverError && (
           <div>
@@ -106,6 +125,7 @@ class App extends React.Component {
             <img id="dog" src="500dog.jpeg" alt="500: Internal Server Error" />
           </div>
         )}
+        <Movies movies={this.state.movies} />
         {this.state.forecast.length < 1 && !(<Weather />)}
         {this.state.error && (
           <div>
