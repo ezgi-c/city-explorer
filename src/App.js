@@ -3,6 +3,7 @@ import React from "react";
 import axios from "axios";
 import Header from "./Header";
 import Weather from "./Weather";
+//import {Container, Form, Button} from 'react-bootstrap
 
 class App extends React.Component {
   constructor(props) {
@@ -12,13 +13,11 @@ class App extends React.Component {
       location: {},
       latitude: "",
       longitude: "",
-      forecast: [],
+      forecast: []
     };
   }
 
-  handleChange = (event) => {
-    this.setState({ searchQuery: event.target.value });
-  };
+  handleChange = (event) => this.setState({ searchQuery: event.target.value });
 
   getLocation = async () => {
     try {
@@ -30,7 +29,7 @@ class App extends React.Component {
       const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.searchQuery}&format=json`;
       // console.log("URL: ", url);
       const response = await axios.get(url);
-      // console.log("Response dayect: ", response);
+      // console.log("Response data: ", response);
       // console.log("response data[0]: ", response.data[0]);
       this.setState(
         {
@@ -38,22 +37,21 @@ class App extends React.Component {
           latitude: response.data[0].lat,
           longitude: response.data[0].lon,
 
-          // console.log("coordinates: ", this.state.latitude, this.state.longitude),
           error: false,
         },
         () => this.getForecast()
-      );
-    } catch (error) {
-      // console.log(error.response.data);
-      this.setState({
-        error: true,
-        location: false,
-      });
-    }
-  };
-
-  getForecast = async () => {
-    try {
+        );
+      } catch (error) {
+        // console.log(error);
+        this.setState({
+          error: true,
+          location: false,
+        });
+      }
+    };
+    
+    getForecast = async () => {
+      try {
       const url = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.latitude}&lon=${this.state.longitude}`;
       console.log("URL: ", url);
       const response = await axios.get(url);
@@ -67,20 +65,6 @@ class App extends React.Component {
       });
     }
   };
-
-  // handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   try {
-  //     const url = `${process.env.REACT_APP_SERVER}/photo?searchQuery=${this.state.searchQuery}`;
-  //     console.log("URL: ", url);
-  //     const response = await axios.get(url);
-  //     console.log(response.data);
-  //     this.setState({ photos: response.data });
-  //   } catch(error) {
-  //     console.error(error);
-  //   }
-  // }
-
 
   render() {
     return (
@@ -112,15 +96,9 @@ class App extends React.Component {
         )}
         <br></br>
         {this.state.forecast.length > 0 && (
-          <>
-            <h1>Weather Forecast</h1>
-
-            {this.state.forecast.map((day, idx) => (
               <Weather
                 forecast={this.state.forecast}
               />
-            ))}
-          </>
         )}
         {this.state.serverError && (
           <div>
