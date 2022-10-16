@@ -27,6 +27,40 @@ html {
   font-size: 14em;
 }
 
+
+.mb-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  margin-top: 2em;
+  display: flex;
+}
+
+.input {
+  width: 400px;
+  font-size: 2em;
+  margin-bottom: 1em;
+  border-radius: 6px;
+}
+
+.button, .button:hover {
+  font-size: 2em;
+  height: 1.9em;
+  background-color: chocolate;
+  color:white;
+  border-radius: 6px;
+}
+
+.button:active {
+  background-color: rgb(175, 87, 24)
+}
+
+.location {
+  margin-top: 3em;
+}
 h2 {
   color:rgb(80, 80, 182);
 }
@@ -35,29 +69,9 @@ h4 {
   color: gray;
 }
 
-input {
-  width: 400px;
-  font-size: 2em;
-  margin-bottom: 1em;
-  border-radius: 6px;
-}
-
-button {
-  font-size: 2em;
-  background-color: chocolate;
-  color:white;
-  border-radius: 6px;
-
-}
-
-button:active {
-  background-color: rgb(175, 87, 24)
-}
-
-
 .map {
   border: 3px solid chocolate;
-  margin: 3em,0;
+  margin: 3em;
 }
 
 .movies {
