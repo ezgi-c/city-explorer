@@ -4,6 +4,10 @@ import axios from "axios";
 import Header from "./Header";
 import Weather from "./Weather";
 import Movies from "./Movies";
+import SearchForm from "./SearchForm";
+import Location from "./Location";
+
+// import Alert from 'react-bootstrap/Alert';
 //import {Container, Form, Button} from 'react-bootstrap
 
 class App extends React.Component {
@@ -19,9 +23,13 @@ class App extends React.Component {
     };
   }
 
-  handleChange = (event) => this.setState({ searchQuery: event.target.value });
+  handleChange = (event) => {
+    event.preventDefault();
+    this.setState({ searchQuery: event.target.value });
+  };
 
-  getLocation = async () => {
+  getLocation = async (event) => {
+    event.preventDefault();
     try {
       // baseURL
       // ? is called a "query"
@@ -38,7 +46,6 @@ class App extends React.Component {
           location: response.data[0],
           latitude: response.data[0].lat,
           longitude: response.data[0].lon,
-
           error: false,
         },
         () => {
@@ -47,10 +54,13 @@ class App extends React.Component {
         }
       );
     } catch (error) {
-      // console.log(error);
+      console.log("Error in getLocation: ", error);
+      alert(`${error.message}. Code: ${error.code}`);
+      // used 'alert' inspired by Ethan's code
       this.setState({
-        error: true,
         location: false,
+        displayWeather: false,
+        displayMovies: false,
       });
     }
   };
@@ -59,15 +69,12 @@ class App extends React.Component {
     try {
       const url = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.latitude}&lon=${this.state.longitude}`;
       console.log("URL: ", url);
-      const response = await axios.get(url);
-      console.log("weather data from server: ", response.data);
-      this.setState({ forecast: response.data });
+      const weatherResponse = await axios.get(url);
+      console.log("weather data from server: ", weatherResponse.data);
+      this.setState({ forecast: weatherResponse.data, displayWeather: true });
     } catch (error) {
       console.log("Error in getForecast: ", error);
-      this.setState({
-        forecast: false,
-        serverError: true,
-      });
+      alert(`${error.message}. Code: ${error.code}`);
     }
   };
 
@@ -77,13 +84,10 @@ class App extends React.Component {
       console.log("URL: ", url);
       const response = await axios.get(url);
       console.log("movie data from server: ", response.data);
-      this.setState({ movies: response.data });
+      this.setState({ movies: response.data, displayMovies: true });
     } catch (error) {
-      console.log("Error in getForecast: ", error);
-      this.setState({
-        forecast: false,
-        serverError: true,
-      });
+      console.log("Error in getMovies: ", error);
+      alert(`${error.message}. Code: ${error.code}`);
     }
   };
 
@@ -91,46 +95,24 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <input
-          type="text"
-          onChange={this.handleChange}
-          placeholder="search for a city"
+        <SearchForm
+          handleChange={this.handleChange}
+          getLocation={this.getLocation}
         />
-        <button onClick={this.getLocation}>Explore!</button>
+        <Location
+          location={this.state.location}
+          latitude={this.state.latitude}
+          longitude={this.state.longitude}
+        />
+        <Weather
+          forecast={this.state.forecast}
+          displayWeather={this.state.displayWeather}
+        />
 
-        {this.state.location.display_name && (
-          <div>
-            <h2>
-              Welocome to {this.state.location.display_name}!
-            </h2>
-            <h4>
-              latitude : {this.state.latitude}, longitude :
-              {this.state.longitude}
-            </h4>
-            <img className="map"
-              src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.latitude},${this.state.longitude}&zoom=11&size=1400x400`}
-              alt="map"
-            />
-          </div>
-        )}
-        <br></br>
-        {this.state.forecast.length > 0 && (
-          <Weather forecast={this.state.forecast} />
-        )}
-        {this.state.serverError && (
-          <div>
-            <h1>Weather Forecast</h1>
-            <img id="dog" src="500dog.jpeg" alt="500: Internal Server Error" />
-          </div>
-        )}
-        <Movies 
-        movies={this.state.movies} />
-        {this.state.forecast.length < 1 && !(<Weather />)}
-        {this.state.error && (
-          <div>
-            <img id="cat" src="400.jpeg" alt="400: Bad Request" />
-          </div>
-        )}
+        <Movies
+          movies={this.state.movies}
+          displayMovies={this.state.displayMovies}
+        />
       </div>
     );
   }
