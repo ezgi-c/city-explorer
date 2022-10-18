@@ -28,7 +28,7 @@ class WeatherDay extends React.Component {
     const day = this.props.day;
     const idx = this.props.idx;
     return (
-      <Accordion.Item eventKey={idx} key={idx}>
+      <Accordion.Item eventKey='0' key={idx}>
         <Accordion.Header>{day.date}</Accordion.Header>
         <Accordion.Body>
           <h4>{day.forecast}</h4>

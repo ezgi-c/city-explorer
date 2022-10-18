@@ -29,7 +29,7 @@ class Movie extends React.Component {
     const movie = this.props.movie;
     const idx = this.props.idx;
     return (
-      <Col className="p-4">
+      <Col className="p-4" key={idx}>
         <Card key={idx} className="" style={{ height: "40em" }}>
           <Card.Img src={movie.image_url} alt={movie.overview} />
           <Card.Body style={{ overflow: "scroll" }}>
