@@ -68,9 +68,9 @@ class App extends React.Component {
   getForecast = async () => {
     try {
       const url = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.latitude}&lon=${this.state.longitude}`;
-      console.log("URL: ", url);
+      // console.log("URL: ", url);
       const weatherResponse = await axios.get(url);
-      console.log("weather data from server: ", weatherResponse.data);
+      // console.log("weather data from server: ", weatherResponse.data);
       this.setState({ forecast: weatherResponse.data, displayWeather: true });
     } catch (error) {
       console.log("Error in getForecast: ", error);
@@ -81,9 +81,9 @@ class App extends React.Component {
   getMovies = async () => {
     try {
       const url = `${process.env.REACT_APP_SERVER}/movies?searchQuery=${this.state.searchQuery}`;
-      console.log("URL: ", url);
+      // console.log("URL: ", url);
       const response = await axios.get(url);
-      console.log("movie data from server: ", response.data);
+      // console.log("movie data from server: ", response.data);
       this.setState({ movies: response.data, displayMovies: true });
     } catch (error) {
       console.log("Error in getMovies: ", error);
@@ -108,7 +108,6 @@ class App extends React.Component {
           forecast={this.state.forecast}
           displayWeather={this.state.displayWeather}
         />
-
         <Movies
           movies={this.state.movies}
           displayMovies={this.state.displayMovies}

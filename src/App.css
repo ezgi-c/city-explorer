@@ -11,10 +11,11 @@ html {
 }
 
 .header {
-  margin-bottom:4em;
   background-image: url("/public/istanbul.jpg");
+  background-position: center;
   height: 600px;
   background-position: center;
+  background-repeat: no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,17 +23,17 @@ html {
 }
 
 .header h1 {
-  /* padding-top: .5em; */
-  color: aliceblue;
+  color: #F8F4F0;
   font-size: 12em;
   font-weight: 900;
 }
-
 
 .mb-3 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 3em;
+  box-shadow:#515f966b 2px 2px 3px;
 }
 
 .form {
@@ -42,74 +43,66 @@ html {
 
 .input {
   width: 400px;
-  font-size: 2em;
-  margin-bottom: 1em;
+  font-size: 1.5em;
   border-radius: 6px;
+  color : #515F96;
 }
 
 .button, .button:hover {
-  font-size: 2em;
-  height: 1.9em;
-  background-color: chocolate;
+  font-size: 1.5em;
+  height: 2em;
+  padding-bottom:1em;
+  background-color: #7280A1;
   color:white;
+  vertical-align: middle;
   border-radius: 6px;
 }
 
 .button:active {
-  background-color: rgb(175, 87, 24)
+  background-color: #515F96 !important;
+  transform: scale(0.98);
+  box-shadow: 3px 2px 22px 1px rgba(95, 94, 94, 0.24);
 }
 
-.location {
-  margin-top: 3em;
-}
 h2 {
-  color:rgb(80, 80, 182);
+  color:#9e5929;
+  margin-bottom: 2em;
+  font-weight: 700;
+  font-size: 40px;
 }
 
 h4 {
   color: gray;
+  font-size: 16px;
 }
 
-input {
-  width: 400px;
-  font-size: 2em;
-  margin-bottom: 1em;
-  border-radius: 6px;
-  color: rgb(79, 75, 75);
-}
-
-button {
-  font-size: 2em;
-  background-color: chocolate;
-  color:white;
-  border-radius: 6px;
-
-}
-
-button:active {
-  background-color: rgb(175, 87, 24)
-}
-
-
-.map {
-  border: 3px solid chocolate;
-  margin: 3em;
+.location {
+  padding: 7em;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .movies {
-  margin-top: 5em;
+  padding: 7em;
 }
 
-.row {
-  margin-left: 10em;
-  margin-right: 10em;
-  display: flex;
-}
-
-#cat {
-  border: none;
+.movies h1 {
+  padding-bottom: .5em;
+  color : #515F96;
 }
 
 .weather {
- margin-top: 5em;
+ padding: 7em;
+ padding-bottom: 0;
+}
+
+.weather h1 {
+  padding-bottom: .5em;
+  color : #515F96;
+}
+
+.weather h4 {
+  font-size: 20px;
 }

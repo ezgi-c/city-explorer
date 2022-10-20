@@ -30,7 +30,7 @@ class WeatherDay extends React.Component {
     return (
       <Accordion.Item eventKey='0' key={idx}>
         <Accordion.Header>{day.date}</Accordion.Header>
-        <Accordion.Body>
+        <Accordion.Body style={{backgroundColor: "#F8F4F0"}}>
           <h4>{day.forecast}</h4>
         </Accordion.Body>
       </Accordion.Item>

@@ -1,6 +1,5 @@
 import "./App.css";
 import React from "react";
-import { Container } from "react-bootstrap";
 
 class Location extends React.Component {
   render() {
@@ -9,10 +8,10 @@ class Location extends React.Component {
     const longitude = this.props.longitude;
 
     return (
-      <Container className="location">
+      <div className="location">
         {display_name && (
           <div>
-            <h2>Welocome to {display_name}!</h2>
+            <h2>{display_name}</h2>
             <h4>
               latitude : {latitude}, longitude :
               {longitude}
@@ -24,7 +23,7 @@ class Location extends React.Component {
             />
           </div>
         )}
-      </Container>
+      </div>
     );
   }
 }
